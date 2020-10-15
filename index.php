@@ -16,19 +16,21 @@
         $products['iPhone']=1000;
         $products['Toaster']=75;
 
+        $tax_rate = 0.0825;
+
         foreach($products as $key=>$value){
-          echo "<p>The ".$key." costs ".$value."</p>";
+          $costWithTax = tax_calc($value,$tax_rate);
+          echo "<p>The ".$key." costs ".$costWithTax." with tax</p>";
         }
 
         echo "<h2>Items you can afford</h2>";
 
         foreach($products as $key=>$value){
-          if($value <= $credit){
+          $costWithTax = tax_calc($value,$tax_rate);
+          if($costWithTax <= $credit){
             echo "<p>".$key."</p>";
           }
         }
-
-        echo tax_calc(750,0.223);
 
         function tax_calc($amount,$tax){
           $calculate_tax = $amount*$tax;
